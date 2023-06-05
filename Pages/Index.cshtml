@@ -1,0 +1,30 @@
+﻿@model List<Reservation.Models.Rezerwacja>
+
+<h1>Lista rezerwacji</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa sali</th>
+            <th>Data</th>
+            <th>Zatwierdzona</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Reservation in Model)
+        {
+            <tr>
+                <td>@Reservation.Sala.Nazwa</td>
+                <td>@Reservation.Data</td>
+                <td>@(Reservation.Zatwierdzona ? "Tak" : "Nie")</td>
+                <td>
+                    @if (!Reservation.Zatwierdzona)
+                    {
+                        <a href="@Url.Action("Anuluj", new { id = Reservation.Id })">Anuluj</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
